@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout:: head"></head>
+
+<body class="bg-success-subtle text-success-emphasis">
+	
+	<header th:replace="layout/layout:: header"></header>
+	
+	<div th:fragment="section" class="container">
+		<h1 th:text="${titulo}" class="my-3"></h1>
+		<hr class="mb-2" />
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#Id</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Apellido</th>
+					<th scope="col">Correo</th>
+					<th scope="col">Editar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cliente: ${clientes}">
+					<th scope="row" th:text="${cliente.id}"></th>
+					<td th:text="${cliente.nombre}"></td>
+					<td th:text="${cliente.apellido}"></td>
+					<td th:text="${cliente.correo}"></td>
+					<td>
+						<a class="btn btn-success btn-xs" th:href="@{/form/}+${cliente.id}" th:text="Editar"></a>
+						<a class="btn btn-danger btn-xs" th:href="@{/eliminar/}+${cliente.id}" th:text="Eliminar"></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<footer th:replace="layout/layout:: pie"></footer>
+</body>
+
+</html>

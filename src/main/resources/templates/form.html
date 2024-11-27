@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout:: head"></head>
+
+<body class="bg-success-subtle text-success-emphasis">
+	
+	<header th:replace="layout/layout:: header"></header>
+	<div class="container">	
+		<h1 th:text="${titulo}" class="my-3"></h1>
+		<hr class="mb-2"/>
+		<form th:action="@{/form}" th:object="${cliente}" method="post" class="bg-body-tertiary p-3 mt-3 rounded shadow" >
+		  <div class="mb-3">
+		    <label for="exampleInputEmail1" class="form-label">Nombre:</label>
+		    <input type="text" class="form-control shadow" id="nombre" th:field="*{nombre}" aria-describedby="nombre">
+		    <div id="nombreHelp" class="form-text" th:if="${#fields.hasErrors('nombre')}" th:errors="*{'nombre'}" >Campo nombre es requerido.</div>
+		  </div>
+		  <div class="mb-3">
+		    <label for="apellido" class="form-label">Apellidos:</label>
+		    <input type="text" class="form-control shadow" id="apellido" th:field="*{apellido}" />
+			<div id="apellidoHelp" class="form-text" th:if="${#fields.hasErrors('apellido')}" th:errors="*{'apellido'}" >Campo apellido es requerido</div>
+		  </div>
+		  <div class="mb-3">
+			<label for="correo" class="form-label">Correo:</label>
+		    <input type="text" class="form-control shadow" id="correo" th:field="*{correo}" />
+			<small id="emailHelp" class="form-text" th:if="${#fields.hasErrors('correo')}" th:errors="*{'correo'}" >Campo correo es requerido</small>
+		  </div>
+		  <input type="hidden" th:field="*{id}" />
+		  <div class="d-flex justify-content-between">
+			  <button type="submit" class="btn btn-primary btn-lg shadow" th:text="${btnName}"></button>
+			  <buton type="submit" class="btn btn-danger btn-lg shadow">Cancelar</button>
+		  </div>
+		</form>
+	</div>
+	<footer th:replace="layout/layout::pie"></footer>
+</body>
+
+</html>
